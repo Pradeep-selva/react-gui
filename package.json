@@ -10,10 +10,31 @@
     "Other"
   ],
   "activationEvents": [
+    "onView:react-gui-side-panel",
     "onCommand:react-gui.helloWorld"
   ],
   "main": "./dist/extension.js",
   "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "react-gui-side-panel-view",
+          "title": "React GUI ",
+          "icon": "media/logo.svg"
+        }
+      ]
+    },
+    "views": {
+      "react-gui-side-panel-view": [
+        {
+          "type": "webview",
+          "id": "react-gui-side-panel",
+          "name": "Create Component",
+          "icon": "media/logo.svg",
+          "contextualTitle": "Create Component"
+        }
+      ]
+    },
     "commands": [
       {
         "command": "react-gui.helloWorld",
@@ -43,7 +64,6 @@
     "@types/vscode": "^1.52.0",
     "@typescript-eslint/eslint-plugin": "^4.9.0",
     "@typescript-eslint/parser": "^4.9.0",
-    "concurrently": "^5.3.0",
     "eslint": "^7.15.0",
     "glob": "^7.1.6",
     "mocha": "^8.1.3",
