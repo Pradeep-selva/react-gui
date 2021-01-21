@@ -1,1 +1,3 @@
-<h1>Hello</h1>
+<script lang="ts"></script>
+
+<h1>New Component</h1>
