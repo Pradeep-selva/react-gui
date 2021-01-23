@@ -1,6 +1,7 @@
 <script lang="ts">
   import { EVENTS } from "../../configs";
   import InputFields from "./subComponents/InputFields.svelte";
+  import RadioFields from "./subComponents/RadioFields.svelte";
 
   type IEntities = Array<{ name: string; type: string }>;
 
@@ -19,6 +20,7 @@
       ...defaultEntity
     }
   ];
+  let fileType = "js";
 
   const onAddProp = () => {
     if (props[props.length - 1].name !== "") {
@@ -28,6 +30,7 @@
           ...defaultEntity
         }
       ];
+      console.log(JSON.stringify(props));
     } else {
       tsvscode.postMessage({
         type: EVENTS.error,
@@ -52,11 +55,26 @@
     }
   };
 
-  const onSubmit = () => console.log(props, states);
+  const onTypeSelect = (event: any) => (fileType = event.target.defaultValue);
+
+  const onSubmit = () => console.log(props, states, fileType);
 </script>
 
 <div>
   <h1 class="heading">New Component</h1>
+  <RadioFields
+    items={[
+      {
+        value: "ts",
+        label: "Typescript"
+      },
+      {
+        value: "js",
+        label: "Javascript"
+      }
+    ]}
+    {onTypeSelect}
+  />
   <InputFields
     items={props}
     onAddItem={onAddProp}
