@@ -24,13 +24,7 @@
 
   const onAddProp = () => {
     if (props[props.length - 1].name !== "") {
-      props = [
-        ...props,
-        {
-          ...defaultEntity
-        }
-      ];
-      console.log(JSON.stringify(props));
+      props = [...props, { ...defaultEntity }];
     } else {
       tsvscode.postMessage({
         type: EVENTS.error,
