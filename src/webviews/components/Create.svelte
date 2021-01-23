@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { EVENTS } from "../../configs";
+
   type IEntities = Array<{ name: string; type: string }>;
 
   const defaultEntity = {
@@ -18,22 +20,35 @@
   ];
 
   const onAddProp = () => {
-    props = [
-      ...props,
-      {
-        ...defaultEntity
-      }
-    ];
-    console.log(props);
+    if (props[props.length - 1].name !== "") {
+      props = [
+        ...props,
+        {
+          ...defaultEntity
+        }
+      ];
+    } else {
+      tsvscode.postMessage({
+        type: EVENTS.error,
+        value: "Complete adding the previous prop to add a new one"
+      });
+    }
   };
 
   const onAddState = () => {
-    states = [
-      ...states,
-      {
-        ...defaultEntity
-      }
-    ];
+    if (states[states.length - 1].name !== "") {
+      states = [
+        ...states,
+        {
+          ...defaultEntity
+        }
+      ];
+    } else {
+      tsvscode.postMessage({
+        type: EVENTS.error,
+        value: "Complete adding the previous state to add a new one"
+      });
+    }
   };
 
   const onSubmit = () => console.log(props, states);
