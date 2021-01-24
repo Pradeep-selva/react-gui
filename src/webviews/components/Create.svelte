@@ -20,7 +20,9 @@
       ...defaultEntity
     }
   ];
-  let fileType = "js";
+  let fileType: "js" | "ts" = "js";
+  let fileName = "";
+  let location: "here" | "new" = "new";
 
   const onAddProp = () => {
     if (props[props.length - 1].name !== "") {
@@ -50,24 +52,53 @@
   };
 
   const onTypeSelect = (event: any) => (fileType = event.target.defaultValue);
+  const onLocationSelect = (event: any) =>
+    (location = event.target.defaultValue);
 
   const onSubmit = () => console.log(props, states, fileType);
 </script>
 
 <div>
   <h1 class="heading">New Component</h1>
+  {#if location === "new"}
+    <h3 style="margin-bottom:5px;">File Name</h3>
+    <input
+      bind:value={fileName}
+      type="text"
+      class="form-field"
+      id={`fileName`}
+      placeholder="Enter the file name"
+    />
+  {/if}
+  <h3>Location</h3>
   <RadioFields
     items={[
       {
-        value: "ts",
-        label: "Typescript"
+        value: "new",
+        label: "Create in a new file"
       },
+      {
+        value: "here",
+        label: "Create here"
+      }
+    ]}
+    onSelect={onLocationSelect}
+    defaultValue="new"
+  />
+  <h3>File Type</h3>
+  <RadioFields
+    items={[
       {
         value: "js",
         label: "Javascript"
+      },
+      {
+        value: "ts",
+        label: "Typescript"
       }
     ]}
-    {onTypeSelect}
+    onSelect={onTypeSelect}
+    defaultValue="js"
   />
   <InputFields
     items={props}
@@ -91,5 +122,9 @@
 
   .create {
     margin-top: 3rem;
+  }
+
+  .form-field {
+    margin-bottom: 1rem;
   }
 </style>

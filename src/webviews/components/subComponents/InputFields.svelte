@@ -16,12 +16,14 @@
           class="form-field"
           id={`${type}-name-${id}`}
           style="margin-right:5px;"
+          placeholder="name"
         />
         <input
           bind:value={item.type}
           type="text"
           class="form-field"
           id={`${type}-type-${id}`}
+          placeholder="type"
         />
       </div>
     {/each}

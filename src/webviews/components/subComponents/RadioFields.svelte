@@ -3,7 +3,8 @@
     value: string;
     label: string;
   }>;
-  export let onTypeSelect: (event: any) => void;
+  export let defaultValue: string;
+  export let onSelect: (event: any) => void;
 </script>
 
 <div>
@@ -15,7 +16,8 @@
           type="radio"
           name="fileType"
           value={item.value}
-          on:click={onTypeSelect}
+          on:click={onSelect}
+          checked={item.value === defaultValue}
         />
         <span class="radio-label">{item.label}</span>
       </div>
