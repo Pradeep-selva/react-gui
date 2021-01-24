@@ -55,20 +55,53 @@
   const onLocationSelect = (event: any) =>
     (location = event.target.defaultValue);
 
-  const onSubmit = () => console.log(props, states, fileType);
+  const onSubmit = () => {
+    const _props = props.map(({ name, type }) =>
+      !!name
+        ? {
+            name,
+            type
+          }
+        : null
+    );
+
+    const _states = states.map(({ name, type }) =>
+      !!name
+        ? {
+            name,
+            type
+          }
+        : null
+    );
+
+    const payload = {
+      fileName,
+      fileType,
+      location,
+      props: _props,
+      states: _states
+    };
+
+    console.log(payload);
+    tsvscode.postMessage({
+      type: EVENTS.submit,
+      value: payload
+    });
+  };
 </script>
 
 <div>
   <h1 class="heading">New Component</h1>
   {#if location === "new"}
-    <h3 style="margin-bottom:5px;">File Name</h3>
+    <h3 style="margin-bottom:5px;">File Path</h3>
     <input
       bind:value={fileName}
       type="text"
       class="form-field"
       id={`fileName`}
-      placeholder="Enter the file name"
+      placeholder="Enter the file path"
     />
+    <h6 class="helper">(Enter relative file path wrt current file)</h6>
   {/if}
   <h3>Location</h3>
   <RadioFields
@@ -125,6 +158,10 @@
   }
 
   .form-field {
+    margin-bottom: 5px;
+  }
+
+  .helper {
     margin-bottom: 1rem;
   }
 </style>

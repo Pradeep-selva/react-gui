@@ -20,6 +20,10 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
 
     webviewView.webview.onDidReceiveMessage((data) => {
       switch (data.type) {
+        case "onSubmit": {
+          console.log(vscode.window.activeTextEditor);
+          break;
+        }
         case "onInfo": {
           if (!data.value) {
             return;
