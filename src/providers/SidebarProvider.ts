@@ -1,5 +1,6 @@
 import * as vscode from "vscode";
 import { getNonce } from "../utils";
+import { componentCreationController } from "../controllers";
 
 export class SidebarProvider implements vscode.WebviewViewProvider {
   _view?: vscode.WebviewView;
@@ -21,7 +22,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
     webviewView.webview.onDidReceiveMessage((data) => {
       switch (data.type) {
         case "onSubmit": {
-          console.log(vscode.window.activeTextEditor);
+          componentCreationController(data.value);
           break;
         }
         case "onInfo": {
