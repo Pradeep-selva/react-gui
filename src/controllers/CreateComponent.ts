@@ -6,9 +6,9 @@ declare var require: any;
 interface IPayload {
   fileName: string;
   componentName: string;
-  fileType: string;
-  location: string;
-  componentType: string;
+  fileType: "ts" | "js";
+  location: "here" | "new";
+  componentType: "rfc" | "rcc";
   props: Array<{ name: string; type: string }>;
   states: Array<{ name: string; type: string }>;
 }
