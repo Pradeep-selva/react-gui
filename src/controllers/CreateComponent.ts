@@ -14,10 +14,14 @@ export default (payload: IPayload) => {
   const path = vscode.window.activeTextEditor?.document.uri.fsPath;
   console.log(payload);
 
-  fs.writeFile(path, componentContent, (err: any) => {
-    if (err) {
-      return console.log(err);
+  fs.writeFile(
+    path,
+    componentContent(payload.props, payload.states),
+    (err: any) => {
+      if (err) {
+        return console.log(err);
+      }
+      console.log("Component created");
     }
-    console.log("Component created");
-  });
+  );
 };
