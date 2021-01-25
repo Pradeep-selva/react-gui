@@ -3,7 +3,8 @@ interface IEntity {
   type: string;
 }
 
-export const componentContent = (
+export const rfcComponentContent = (
+  componentName: string,
   props: Array<IEntity>,
   states: Array<IEntity>
 ) => {
@@ -11,18 +12,18 @@ export const componentContent = (
   const stateString = states
     .map(
       (state) =>
-        `const [${state.name}, set${state.name}] = React.useState(null);\n`
+        `const [${state.name}, set${state.name}] = React.useState(null);`
     )
-    .join(",");
+    .join("\n  ");
 
   return `import React from "react";
 
-  const Component = ({${propString}}) => {
-    ${stateString}
+const ${componentName} = ({${propString}}) => {
+  ${stateString}
 
-    return (<div></div>);
-  };
+  return (<div></div>);
+};
 
-  export default Component
+export default ${componentName};
 `;
 };

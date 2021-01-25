@@ -21,7 +21,9 @@
     }
   ];
   let fileType: "js" | "ts" = "js";
+  let componentType: "rfc" | "rcc";
   let fileName = "";
+  let componentName = "";
   let location: "here" | "new" = "new";
 
   const onAddProp = () => {
@@ -51,7 +53,10 @@
     }
   };
 
-  const onTypeSelect = (event: any) => (fileType = event.target.defaultValue);
+  const onFileTypeSelect = (event: any) =>
+    (fileType = event.target.defaultValue);
+  const onComponentTypeSelect = (event: any) =>
+    (componentType = event.target.defaultValue);
   const onLocationSelect = (event: any) =>
     (location = event.target.defaultValue);
 
@@ -76,8 +81,10 @@
 
     const payload = {
       fileName,
+      componentName,
       fileType,
       location,
+      componentType,
       props: _props,
       states: _states
     };
@@ -93,16 +100,24 @@
 <div>
   <h1 class="heading">New Component</h1>
   {#if location === "new"}
-    <h3 style="margin-bottom:5px;">File Path</h3>
+    <h3 style="margin-bottom:5px;">File Name</h3>
     <input
       bind:value={fileName}
       type="text"
       class="form-field"
       id={`fileName`}
-      placeholder="Enter the file path"
+      placeholder="Enter the file name"
     />
-    <h6 class="helper">(Enter relative file path wrt current file)</h6>
   {/if}
+  <h3 style="margin:1rem 0 5px 0;">Component Name</h3>
+  <input
+    bind:value={componentName}
+    type="text"
+    class="form-field"
+    style="margin-bottom:2rem;"
+    id={`componentName`}
+    placeholder="Enter the component's name'"
+  />
   <h3>Location</h3>
   <RadioFields
     items={[
@@ -130,8 +145,23 @@
         label: "Typescript"
       }
     ]}
-    onSelect={onTypeSelect}
+    onSelect={onFileTypeSelect}
     defaultValue="js"
+  />
+  <h3>Component Type</h3>
+  <RadioFields
+    items={[
+      {
+        value: "rfc",
+        label: "Functional"
+      },
+      {
+        value: "rcc",
+        label: "Class"
+      }
+    ]}
+    onSelect={onComponentTypeSelect}
+    defaultValue="rfc"
   />
   <InputFields
     items={props}
@@ -159,9 +189,5 @@
 
   .form-field {
     margin-bottom: 5px;
-  }
-
-  .helper {
-    margin-bottom: 1rem;
   }
 </style>

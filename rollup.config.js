@@ -46,8 +46,7 @@ export default fs
         typescript({
           tsconfig: "src/webviews/tsconfig.json",
           sourceMap: !production,
-          inlineSources: !production,
-          rootDir: "./src/webviews"
+          inlineSources: !production
         }),
 
         // In dev mode, call `npm run start` once
