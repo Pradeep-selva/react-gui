@@ -1,5 +1,6 @@
 <script lang="ts">
   import { EVENTS } from "../../configs";
+  import validate from "./Validate";
   import InputFields from "./subComponents/InputFields.svelte";
   import RadioFields from "./subComponents/RadioFields.svelte";
 
@@ -88,11 +89,19 @@
       props: !!_props[0] ? _props : [],
       states: !!_states[0] ? _states : []
     };
+    const validatedResult = validate(payload);
 
-    tsvscode.postMessage({
-      type: EVENTS.submit,
-      value: payload
-    });
+    if (!validatedResult) {
+      tsvscode.postMessage({
+        type: EVENTS.submit,
+        value: payload
+      });
+    } else {
+      tsvscode.postMessage({
+        type: EVENTS.error,
+        value: validatedResult
+      });
+    }
   };
 </script>
 
