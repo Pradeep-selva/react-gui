@@ -15,7 +15,6 @@ export const rfcComponentContent = (
     )
     .join("\n    ");
   const reactImport = "React" + (!!states[0] ? ", {useState}" : "");
-  console.log(reactImport);
 
   return `import ${reactImport} from "react";
 

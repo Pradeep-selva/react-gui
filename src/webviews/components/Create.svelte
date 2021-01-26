@@ -89,7 +89,6 @@
       states: !!_states[0] ? _states : []
     };
 
-    console.log(payload);
     tsvscode.postMessage({
       type: EVENTS.submit,
       value: payload
