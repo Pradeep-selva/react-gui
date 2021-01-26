@@ -12,8 +12,8 @@ export const rfcTsComponentContent = (
     .map((prop) => `${prop.name}: ${prop.type};`)
     .join("\n  ");
   const propInterface = `interface IProps {
-        ${propTypes}
-    }`;
+  ${propTypes}
+}`;
 
   const propString = props.map((prop) => prop?.name).join(",");
   const stateString = states
@@ -27,7 +27,7 @@ export const rfcTsComponentContent = (
 
   return `import ${reactImport} from "react";
 
-${!!props[0] && propInterface}
+${!!props[0] ? propInterface : ""}
 
 const ${componentName} = ({${propString}}: IProps) => {
   ${stateString}
@@ -48,15 +48,15 @@ export const rccTsComponentContent = (
     .map((prop) => `${prop.name}: ${prop.type};`)
     .join("\n  ");
   const propInterface = `interface IProps {
-        ${propTypes}
-    }`;
+  ${propTypes}
+}`;
 
   const stateTypes = states
     .map((state) => `${state.name}: ${state.type};`)
     .join("\n");
   const stateInterface = `interface IState {
-        ${stateTypes}
-    }`;
+  ${stateTypes}
+}`;
 
   const propString = props.map((prop) => prop?.name).join(",");
   const stateString = states
@@ -65,17 +65,22 @@ export const rccTsComponentContent = (
 
   const stateInit = `this.state = {
       ${stateString}
-  };`;
+    };`;
   const stateDeconstruct = !!states[0]
     ? `const {${states.map((state) => state?.name).join(", ")}} = this.state;`
     : "";
 
+  const componentTypeString =
+    !!props[0] || !!states[0]
+      ? `<${!!props[0] ? "IProps" : ""}${!!states[0] ? ", IState" : ""}>`
+      : "";
+
   return `import React, {Component} from "react";
 
-${!!props[0] && propInterface}
-${!!states[0] && stateInterface}
+${!!props[0] ? propInterface : ""}
+${!!states[0] ? stateInterface : ""}
 
-class ${componentName} extends Component<IProps, IState> {
+class ${componentName} extends Component${componentTypeString} {
   constructor(props: IProps) {
     super(props);
     ${!!states[0] ? stateInit : ""}
@@ -87,6 +92,7 @@ class ${componentName} extends Component<IProps, IState> {
 
     return (<div></div>);
   }
-}
-  `;
+};
+
+export default ${componentName};`;
 };

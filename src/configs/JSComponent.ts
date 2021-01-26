@@ -39,7 +39,7 @@ export const rccJsComponentContent = (
     .join("\n    ");
   const stateInit = `this.state = {
       ${stateString}
-  };`;
+    };`;
   const stateDeconstruct = !!states[0]
     ? `const {${states.map((state) => state?.name).join(", ")}} = this.state;`
     : "";
@@ -58,6 +58,7 @@ class ${componentName} extends Component {
 
     return (<div></div>);
   }
-}
-  `;
+};
+
+export default ${componentName}`;
 };
