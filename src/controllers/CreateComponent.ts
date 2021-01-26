@@ -1,5 +1,5 @@
 import * as vscode from "vscode";
-import { rccComponentContent, rfcComponentContent } from "../configs";
+import { rccJsComponentContent, rfcJsComponentContent } from "../configs";
 
 declare var require: any;
 
@@ -21,8 +21,8 @@ export default (payload: IPayload) => {
   fs.writeFile(
     path,
     componentType === "rfc"
-      ? rfcComponentContent(componentName, props, states)
-      : rccComponentContent(componentName, props, states),
+      ? rfcJsComponentContent(componentName, props, states)
+      : rccJsComponentContent(componentName, props, states),
     (err: any) => {
       if (err) {
         return vscode.window.showErrorMessage(

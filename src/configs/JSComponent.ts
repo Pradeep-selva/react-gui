@@ -3,7 +3,7 @@ interface IEntity {
   type: string;
 }
 
-export const rfcComponentContent = (
+export const rfcJsComponentContent = (
   componentName: string,
   props: Array<IEntity> = [],
   states: Array<IEntity> = []
@@ -28,7 +28,7 @@ export default ${componentName};
 `;
 };
 
-export const rccComponentContent = (
+export const rccJsComponentContent = (
   componentName: string,
   props: Array<IEntity> = [],
   states: Array<IEntity> = []
