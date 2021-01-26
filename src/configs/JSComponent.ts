@@ -56,7 +56,7 @@ class ${componentName} extends Component {
     const {${propString}} = this.props;
     ${stateDeconstruct}
 
-    return (<div></div>)
+    return (<div></div>);
   }
 }
   `;

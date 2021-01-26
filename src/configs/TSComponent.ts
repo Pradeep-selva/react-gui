@@ -26,7 +26,8 @@ export const rfcTsComponentContent = (
   const reactImport = "React" + (!!states[0] ? ", {useState}" : "");
 
   return `import ${reactImport} from "react";
-    ${!!props[0] && propInterface}
+
+${!!props[0] && propInterface}
 
 const ${componentName} = ({${propString}}: IProps) => {
   ${stateString}
@@ -36,4 +37,56 @@ const ${componentName} = ({${propString}}: IProps) => {
 
 export default ${componentName};
 `;
+};
+
+export const rccTsComponentContent = (
+  componentName: string,
+  props: Array<IEntity> = [],
+  states: Array<IEntity> = []
+) => {
+  const propTypes = props
+    .map((prop) => `${prop.name}: ${prop.type};`)
+    .join("\n  ");
+  const propInterface = `interface IProps {
+        ${propTypes}
+    }`;
+
+  const stateTypes = states
+    .map((state) => `${state.name}: ${state.type};`)
+    .join("\n");
+  const stateInterface = `interface IState {
+        ${stateTypes}
+    }`;
+
+  const propString = props.map((prop) => prop?.name).join(",");
+  const stateString = states
+    .map((state) => `${state?.name}: null,`)
+    .join("\n    ");
+
+  const stateInit = `this.state = {
+      ${stateString}
+  };`;
+  const stateDeconstruct = !!states[0]
+    ? `const {${states.map((state) => state?.name).join(", ")}} = this.state;`
+    : "";
+
+  return `import React, {Component} from "react";
+
+${!!props[0] && propInterface}
+${!!states[0] && stateInterface}
+
+class ${componentName} extends Component<IProps, IState> {
+  constructor(props: IProps) {
+    super(props);
+    ${!!states[0] ? stateInit : ""}
+  }
+
+  render() {
+    const {${propString}} = this.props;
+    ${stateDeconstruct}
+
+    return (<div></div>);
+  }
+}
+  `;
 };
