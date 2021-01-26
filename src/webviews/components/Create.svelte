@@ -25,7 +25,7 @@
   let componentType: "rfc" | "rcc" = "rfc";
   let fileName = "";
   let componentName = "";
-  let location: "here" | "new" = "new";
+  let location: "here" | "new" = "here";
 
   const onAddProp = () => {
     if (props[props.length - 1].name !== "") {
@@ -130,16 +130,16 @@
   <RadioFields
     items={[
       {
-        value: "new",
-        label: "Create in a new file"
-      },
-      {
         value: "here",
         label: "Create here"
+      },
+      {
+        value: "new",
+        label: "Create in a new file"
       }
     ]}
     onSelect={onLocationSelect}
-    defaultValue="new"
+    defaultValue="here"
   />
   <h3>File Type</h3>
   <RadioFields
