@@ -21,7 +21,7 @@
     }
   ];
   let fileType: "js" | "ts" = "js";
-  let componentType: "rfc" | "rcc";
+  let componentType: "rfc" | "rcc" = "rfc";
   let fileName = "";
   let componentName = "";
   let location: "here" | "new" = "new";
@@ -85,8 +85,8 @@
       fileType,
       location,
       componentType,
-      props: _props,
-      states: _states
+      props: !!_props[0] ? _props : [],
+      states: !!_states[0] ? _states : []
     };
 
     console.log(payload);
