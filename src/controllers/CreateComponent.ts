@@ -16,16 +16,20 @@ interface IPayload {
 export default (payload: IPayload) => {
   const fs = require("fs");
   const path = vscode.window.activeTextEditor?.document.uri.fsPath;
-  console.log(payload);
+  const { componentName, props, states } = payload;
 
   fs.writeFile(
     path,
-    rfcComponentContent(payload.componentName, payload.props, payload.states),
+    rfcComponentContent(componentName, props, states),
     (err: any) => {
       if (err) {
-        return console.log(err);
+        return vscode.window.showErrorMessage(
+          "An error occurred. Unable to write file"
+        );
       }
-      console.log("Component created");
+      vscode.window.showInformationMessage(
+        `Component ${componentName} created successfully!`
+      );
     }
   );
 };
