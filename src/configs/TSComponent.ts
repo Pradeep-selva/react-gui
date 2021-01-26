@@ -1,3 +1,5 @@
+import { capitalize } from "../utils";
+
 interface IEntity {
   name: string;
   type: string;
@@ -19,7 +21,9 @@ export const rfcTsComponentContent = (
   const stateString = states
     .map(
       (state) =>
-        `const [${state?.name}, set${state?.name}] = useState<${state.type}>(null);`
+        `const [${state?.name}, set${capitalize(state?.name)}] = useState<${
+          state.type
+        }>(null);`
     )
     .join("\n    ");
 
