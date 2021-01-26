@@ -1,5 +1,5 @@
 import * as vscode from "vscode";
-import { rfcComponentContent } from "../configs";
+import { rccComponentContent, rfcComponentContent } from "../configs";
 
 declare var require: any;
 
@@ -16,11 +16,13 @@ interface IPayload {
 export default (payload: IPayload) => {
   const fs = require("fs");
   const path = vscode.window.activeTextEditor?.document.uri.fsPath;
-  const { componentName, props, states } = payload;
+  const { componentName, props, states, componentType } = payload;
 
   fs.writeFile(
     path,
-    rfcComponentContent(componentName, props, states),
+    componentType === "rfc"
+      ? rfcComponentContent(componentName, props, states)
+      : rccComponentContent(componentName, props, states),
     (err: any) => {
       if (err) {
         return vscode.window.showErrorMessage(
