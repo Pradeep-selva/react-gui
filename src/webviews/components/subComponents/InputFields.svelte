@@ -8,6 +8,9 @@
 
 <div>
   <h3>{title}</h3>
+  {#if fileType === "js" && type === "props"}
+    <h6 class="helperText">(enter valid react prop types. Default: any)</h6>
+  {/if}
   <form>
     {#each items as item, id}
       <div class="form-container">
@@ -19,7 +22,7 @@
           style="margin-right:5px;"
           placeholder="name"
         />
-        {#if fileType === "ts"}
+        {#if fileType === "ts" || type === "props"}
           <input
             bind:value={item.type}
             type="text"
@@ -42,5 +45,9 @@
 
   .form-field {
     flex: 1;
+  }
+
+  .helperText {
+    padding: 0.5rem 0;
   }
 </style>

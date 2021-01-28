@@ -1,3 +1,5 @@
+import { propTypes } from "../../configs";
+
 interface IPayload {
   fileName: string;
   componentName: string;
@@ -24,6 +26,13 @@ export default (payload: IPayload): string => {
 
   if (location === "new" && !fileName) {
     return "You must enter a file name to create component.";
+  }
+
+  if (
+    fileType === "js" &&
+    !props.every((prop) => propTypes.includes(prop?.type || ""))
+  ) {
+    return "Some of the entered prop types are not valid. Leave the type field empty to use default value.";
   }
 
   if (fileType === "ts") {
