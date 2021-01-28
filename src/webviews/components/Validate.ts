@@ -21,7 +21,12 @@ export default (payload: IPayload): string => {
 
   if (
     fileType === "js" &&
-    !props.every((prop) => propTypes.includes(prop?.type || ""))
+    !props.every(
+      (prop) =>
+        !prop ||
+        prop?.type.split(".").every((type) => propTypes.includes(type || "")) ||
+        prop?.type.includes("Of")
+    )
   ) {
     return "Some of the entered prop types are not valid. Leave the type field empty to use default value.";
   }

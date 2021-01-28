@@ -70,7 +70,7 @@
       !!name
         ? {
             name,
-            type: !!type ? type.toLowerCase() : "any"
+            type: !!type ? type : "any"
           }
         : null
     );
