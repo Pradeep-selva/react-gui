@@ -1,4 +1,5 @@
 import * as vscode from "vscode";
+import type { IPayload } from "../types";
 import {
   rccJsComponentContent,
   rfcJsComponentContent,
@@ -7,16 +8,6 @@ import {
 } from "../configs";
 
 declare var require: any;
-
-interface IPayload {
-  fileName: string;
-  componentName: string;
-  fileType: "ts" | "js";
-  location: "here" | "new";
-  componentType: "rfc" | "rcc";
-  props: Array<{ name: string; type: string }>;
-  states: Array<{ name: string; type: string }>;
-}
 
 export default (payload: IPayload) => {
   const fs = require("fs");

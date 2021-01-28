@@ -1,14 +1,10 @@
 import { capitalize } from "../utils";
-
-interface IEntity {
-  name: string;
-  type: string;
-}
+import type { IEntities } from "../types";
 
 export const rfcJsComponentContent = (
   componentName: string,
-  props: Array<IEntity> = [],
-  states: Array<IEntity> = []
+  props: IEntities = [],
+  states: IEntities = []
 ) => {
   const propString = props.map((prop) => prop?.name).join(",");
   const stateString = states
@@ -35,8 +31,8 @@ export default ${componentName};
 
 export const rccJsComponentContent = (
   componentName: string,
-  props: Array<IEntity> = [],
-  states: Array<IEntity> = []
+  props: IEntities = [],
+  states: IEntities = []
 ) => {
   const propString = props.map((prop) => prop?.name).join(",");
   const stateString = states

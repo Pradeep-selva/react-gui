@@ -1,14 +1,10 @@
 import { capitalize } from "../utils";
-
-interface IEntity {
-  name: string;
-  type: string;
-}
+import type { IEntities } from "../types";
 
 export const rfcTsComponentContent = (
   componentName: string,
-  props: Array<IEntity> = [],
-  states: Array<IEntity> = []
+  props: IEntities = [],
+  states: IEntities = []
 ) => {
   const propTypes = props
     .map((prop) => `${prop.name}: ${prop.type};`)
@@ -45,8 +41,8 @@ export default ${componentName};
 
 export const rccTsComponentContent = (
   componentName: string,
-  props: Array<IEntity> = [],
-  states: Array<IEntity> = []
+  props: IEntities = [],
+  states: IEntities = []
 ) => {
   const propTypes = props
     .map((prop) => `${prop.name}: ${prop.type};`)

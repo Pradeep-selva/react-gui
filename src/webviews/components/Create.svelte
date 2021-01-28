@@ -1,10 +1,14 @@
 <script lang="ts">
+  import type {
+    IEntities,
+    FileType,
+    ComponentType,
+    LocationType
+  } from "../../types";
   import { EVENTS } from "../../configs";
   import validate from "./Validate";
   import InputFields from "./subComponents/InputFields.svelte";
   import RadioFields from "./subComponents/RadioFields.svelte";
-
-  type IEntities = Array<{ name: string; type: string }>;
 
   const defaultEntity = {
     name: "",
@@ -21,11 +25,11 @@
       ...defaultEntity
     }
   ];
-  let fileType: "js" | "ts" = "js";
-  let componentType: "rfc" | "rcc" = "rfc";
+  let fileType: FileType = "js";
+  let componentType: ComponentType = "rfc";
   let fileName = "";
   let componentName = "";
-  let location: "here" | "new" = "here";
+  let location: LocationType = "here";
 
   const onAddProp = () => {
     if (props[props.length - 1].name !== "") {
