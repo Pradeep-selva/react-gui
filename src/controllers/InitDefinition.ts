@@ -9,7 +9,7 @@ export default () => {
   const text = editor?.document.getText(selection);
 
   const path = vscode.window.activeTextEditor?.document.uri.fsPath;
-  const pathToWrite = `${path?.slice(0, path.length - 3)}.d.ts`;
+  const pathToWrite = `${path?.slice(0, path?.lastIndexOf("."))}.d.ts`;
 
   if (!["js", "jsx"].some((ext) => path?.endsWith(ext))) {
     vscode.window.showErrorMessage(
