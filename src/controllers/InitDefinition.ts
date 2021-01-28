@@ -1,19 +1,19 @@
 import * as vscode from "vscode";
+declare var require: any;
 
 export default () => {
+  const fs = require("fs");
+
   const editor = vscode.window.activeTextEditor;
   const selection = editor?.selection;
   const text = editor?.document.getText(selection);
-  const path = vscode.window.activeTextEditor?.document.uri.fsPath;
-  console.log(Math.random() * 9);
 
-  if (
-    !["js", "ts", "jsx", "tsx"].includes(
-      path?.slice(path?.length - 2) || `${Math.random() * 9}`
-    )
-  ) {
+  const path = vscode.window.activeTextEditor?.document.uri.fsPath;
+  const pathToWrite = `${path?.slice(0, path.length - 3)}.d.ts`;
+
+  if (!["js", "jsx"].some((ext) => path?.endsWith(ext))) {
     vscode.window.showErrorMessage(
-      "Command can only be used in js, ts, jsx and tsx files."
+      "Command can only be used in js and jsx files."
     );
     return;
   }
@@ -34,5 +34,14 @@ declare const Component: React.SFC<ComponentProps>;
 
 export default Component;`;
 
-  vscode.window.showInformationMessage(JSON.stringify(propList));
+  fs.writeFile(pathToWrite, content, (err: any) => {
+    if (err) {
+      return vscode.window.showErrorMessage(
+        "An error occurred. Unable to write file"
+      );
+    }
+    vscode.window.showInformationMessage(
+      `Definition file created successfully!`
+    );
+  });
 };
