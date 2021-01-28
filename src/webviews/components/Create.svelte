@@ -176,12 +176,14 @@
     onAddItem={onAddProp}
     title={"Props"}
     type={"props"}
+    {fileType}
   />
   <InputFields
     items={states}
     onAddItem={onAddState}
     title={"State"}
     type={"state"}
+    {fileType}
   />
   <button class="create" on:click={onSubmit}>Create</button>
 </div>

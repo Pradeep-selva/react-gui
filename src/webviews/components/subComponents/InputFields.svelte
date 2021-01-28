@@ -3,6 +3,7 @@
   export let type: "props" | "state";
   export let title: string;
   export let items: Array<any>;
+  export let fileType: "js" | "ts";
 </script>
 
 <div>
@@ -18,13 +19,15 @@
           style="margin-right:5px;"
           placeholder="name"
         />
-        <input
-          bind:value={item.type}
-          type="text"
-          class="form-field"
-          id={`${type}-type-${id}`}
-          placeholder="type"
-        />
+        {#if fileType === "ts"}
+          <input
+            bind:value={item.type}
+            type="text"
+            class="form-field"
+            id={`${type}-type-${id}`}
+            placeholder="type"
+          />
+        {/if}
       </div>
     {/each}
     <button on:click={onAddItem}> add {type}</button>
