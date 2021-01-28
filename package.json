@@ -11,7 +11,7 @@
   ],
   "activationEvents": [
     "onView:react-gui-side-panel",
-    "onCommand:react-gui.helloWorld"
+    "onCommand:react-gui.init-def"
   ],
   "main": "./dist/extension.js",
   "contributes": {
@@ -37,8 +37,9 @@
     },
     "commands": [
       {
-        "command": "react-gui.helloWorld",
-        "title": "Hello World"
+        "command": "react-gui.init-def",
+        "title": "Initialize definition file",
+        "category": "React GUI"
       }
     ]
   },
