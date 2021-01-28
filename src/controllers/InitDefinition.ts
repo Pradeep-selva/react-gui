@@ -1,4 +1,5 @@
 import * as vscode from "vscode";
+import { initDefContent } from "../configs";
 declare var require: any;
 
 export default () => {
@@ -23,18 +24,7 @@ export default () => {
     .map((prop) => `${prop.replace(" ", "").replace("\n", "")}: ;`)
     .join("\n  ");
 
-  const content = `// replace 'Component' with the name of your component and add types to your props.
-import React from "react";
-
-interface ComponentProps {
-  ${propList}
-}
-
-declare const Component: React.SFC<ComponentProps>;
-
-export default Component;`;
-
-  fs.writeFile(pathToWrite, content, (err: any) => {
+  fs.writeFile(pathToWrite, initDefContent(propList || ""), (err: any) => {
     if (err) {
       return vscode.window.showErrorMessage(
         "An error occurred. Unable to write file"
