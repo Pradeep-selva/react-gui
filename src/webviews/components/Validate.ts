@@ -1,14 +1,5 @@
 import { propTypes } from "../../configs";
-
-interface IPayload {
-  fileName: string;
-  componentName: string;
-  fileType: "ts" | "js";
-  location: "here" | "new";
-  componentType: "rfc" | "rcc";
-  props: Array<{ name: string; type: string } | null>;
-  states: Array<{ name: string; type: string } | null>;
-}
+import type { IPayload } from "../../types";
 
 export default (payload: IPayload): string => {
   const {

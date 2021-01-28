@@ -7,6 +7,10 @@ export const rfcJsComponentContent = (
   states: IEntities = []
 ) => {
   const propString = props.map((prop) => prop?.name).join(",");
+  const propTypeString = props
+    .map((prop) => `${prop?.name}: PropTypes.${prop?.type},`)
+    .join("\n  ");
+
   const stateString = states
     .map(
       (state) =>
@@ -18,11 +22,16 @@ export const rfcJsComponentContent = (
   const reactImport = "React" + (!!states[0] ? ", {useState}" : "");
 
   return `import ${reactImport} from "react";
+import PropTypes from 'prop-types';
 
 const ${componentName} = ({${propString}}) => {
   ${stateString}
 
   return (<div></div>);
+};
+
+${componentName}.propTypes = {
+  ${propTypeString}
 };
 
 export default ${componentName};
@@ -35,6 +44,10 @@ export const rccJsComponentContent = (
   states: IEntities = []
 ) => {
   const propString = props.map((prop) => prop?.name).join(",");
+  const propTypeString = props
+    .map((prop) => `${prop?.name}: PropTypes.${prop?.type},`)
+    .join("\n  ");
+
   const stateString = states
     .map((state) => `${state?.name}: null,`)
     .join("\n    ");
@@ -46,6 +59,7 @@ export const rccJsComponentContent = (
     : "";
 
   return `import React, {Component} from "react";
+import PropTypes from 'prop-types';
 
 class ${componentName} extends Component {
   constructor(props) {
@@ -59,6 +73,10 @@ class ${componentName} extends Component {
 
     return (<div></div>);
   }
+};
+
+${componentName}.propTypes = {
+  ${propTypeString}
 };
 
 export default ${componentName}`;
