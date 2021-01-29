@@ -8,7 +8,8 @@ export default (payload: IPayload): string => {
     fileType,
     location,
     props,
-    states
+    states,
+    isTypeChecked
   } = payload;
 
   if (!componentName) {
@@ -21,6 +22,7 @@ export default (payload: IPayload): string => {
 
   if (
     fileType === "js" &&
+    isTypeChecked &&
     !props.every(
       (prop) =>
         !prop ||
