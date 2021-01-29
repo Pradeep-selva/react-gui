@@ -3,7 +3,8 @@
     IEntities,
     FileType,
     ComponentType,
-    LocationType
+    LocationType,
+    TypeCheckType
   } from "../../types";
   import { EVENTS } from "../../configs";
   import validate from "./Validate";
@@ -27,9 +28,10 @@
   ];
   let fileType: FileType = "js";
   let componentType: ComponentType = "rfc";
+  let location: LocationType = "here";
+  let typeChecking: TypeCheckType = "none";
   let fileName = "";
   let componentName = "";
-  let location: LocationType = "here";
 
   const onAddProp = () => {
     if (props[props.length - 1].name !== "") {
@@ -64,6 +66,8 @@
     (componentType = event.target.defaultValue);
   const onLocationSelect = (event: any) =>
     (location = event.target.defaultValue);
+  const onTypeCheckSelect = (event: any) =>
+    (typeChecking = event.target.defaultValue);
 
   const onSubmit = () => {
     const _props = props.map(({ name, type }) =>
@@ -90,8 +94,9 @@
       fileType,
       location,
       componentType,
-      props: !!_props[0] ? _props : [],
-      states: !!_states[0] ? _states : []
+      props: (!!_props[0] ? _props : []) as IEntities,
+      states: (!!_states[0] ? _states : []) as IEntities,
+      isTypeChecked: typeChecking === "propTypes"
     };
     const validatedResult = validate(payload);
 
@@ -160,6 +165,23 @@
     onSelect={onFileTypeSelect}
     defaultValue="js"
   />
+  {#if fileType === "js"}
+    <h3>Type Checking</h3>
+    <RadioFields
+      items={[
+        {
+          value: "none",
+          label: "None"
+        },
+        {
+          value: "propTypes",
+          label: "PropTypes"
+        }
+      ]}
+      onSelect={onTypeCheckSelect}
+      defaultValue="none"
+    />
+  {/if}
   <h3>Component Type</h3>
   <RadioFields
     items={[
@@ -180,14 +202,15 @@
     onAddItem={onAddProp}
     title={"Props"}
     type={"props"}
-    {fileType}
+    isTypeChecked={(fileType === "js" && typeChecking === "propTypes") ||
+      fileType === "ts"}
   />
   <InputFields
     items={states}
     onAddItem={onAddState}
     title={"State"}
     type={"state"}
-    {fileType}
+    isTypeChecked={fileType === "ts"}
   />
   <button class="create" on:click={onSubmit}>Create</button>
 </div>

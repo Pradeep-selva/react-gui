@@ -3,12 +3,12 @@
   export let type: "props" | "state";
   export let title: string;
   export let items: Array<any>;
-  export let fileType: "js" | "ts";
+  export let isTypeChecked: boolean;
 </script>
 
 <div>
   <h3>{title}</h3>
-  {#if fileType === "js" && type === "props"}
+  {#if isTypeChecked}
     <h6 class="helperText">(enter valid react prop types. Default: any)</h6>
   {/if}
   <form>
@@ -22,7 +22,7 @@
           style="margin-right:5px;"
           placeholder="name"
         />
-        {#if fileType === "ts" || type === "props"}
+        {#if isTypeChecked}
           <input
             bind:value={item.type}
             type="text"

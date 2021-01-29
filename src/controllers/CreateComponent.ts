@@ -18,8 +18,18 @@ export default (payload: IPayload) => {
     path,
     fileType === "js"
       ? componentType === "rfc"
-        ? rfcJsComponentContent(componentName, props, states)
-        : rccJsComponentContent(componentName, props, states)
+        ? rfcJsComponentContent(
+            componentName,
+            props,
+            states,
+            payload.isTypeChecked
+          )
+        : rccJsComponentContent(
+            componentName,
+            props,
+            states,
+            payload.isTypeChecked
+          )
       : componentType === "rfc"
       ? rfcTsComponentContent(componentName, props, states)
       : rccTsComponentContent(componentName, props, states),

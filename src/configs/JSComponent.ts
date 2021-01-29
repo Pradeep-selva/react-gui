@@ -4,12 +4,19 @@ import type { IEntities } from "../types";
 export const rfcJsComponentContent = (
   componentName: string,
   props: IEntities = [],
-  states: IEntities = []
+  states: IEntities = [],
+  isTypeChecked: boolean = false
 ) => {
   const propString = props.map((prop) => prop?.name).join(",");
-  const propTypeString = props
-    .map((prop) => `${prop?.name}: PropTypes.${prop?.type},`)
-    .join("\n  ");
+  let propTypeString = "";
+
+  if (isTypeChecked) {
+    propTypeString = `${componentName}.propTypes = {
+      ${props
+        .map((prop) => `${prop?.name}: PropTypes.${prop?.type},`)
+        .join("\n  ")}
+    }`;
+  }
 
   const stateString = states
     .map(
@@ -30,10 +37,7 @@ const ${componentName} = ({${propString}}) => {
   return (<div></div>);
 };
 
-${componentName}.propTypes = {
-  ${propTypeString}
-};
-
+${propTypeString}
 export default ${componentName};
 `;
 };
@@ -41,12 +45,19 @@ export default ${componentName};
 export const rccJsComponentContent = (
   componentName: string,
   props: IEntities = [],
-  states: IEntities = []
+  states: IEntities = [],
+  isTypeChecked: boolean = false
 ) => {
   const propString = props.map((prop) => prop?.name).join(",");
-  const propTypeString = props
-    .map((prop) => `${prop?.name}: PropTypes.${prop?.type},`)
-    .join("\n  ");
+  let propTypeString = "";
+
+  if (isTypeChecked) {
+    propTypeString = `${componentName}.propTypes = {
+      ${props
+        .map((prop) => `${prop?.name}: PropTypes.${prop?.type},`)
+        .join("\n  ")}
+    }`;
+  }
 
   const stateString = states
     .map((state) => `${state?.name}: null,`)
@@ -75,9 +86,6 @@ class ${componentName} extends Component {
   }
 };
 
-${componentName}.propTypes = {
-  ${propTypeString}
-};
-
+${propTypeString}
 export default ${componentName}`;
 };
