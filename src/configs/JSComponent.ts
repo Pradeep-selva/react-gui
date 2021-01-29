@@ -1,16 +1,20 @@
+import * as vscode from "vscode";
 import { capitalize } from "../utils";
-import type { IEntities } from "../types";
+import { InitDefinitionController } from "../controllers";
+import type { IEntities, LocationType } from "../types";
 
 export const rfcJsComponentContent = (
   componentName: string,
   props: IEntities = [],
   states: IEntities = [],
-  isTypeChecked: boolean = false
+  initPropTypes: boolean = false,
+  initDefFile: boolean = false,
+  location: LocationType
 ) => {
   const propString = props.map((prop) => prop?.name).join(",");
   let propTypeString = "";
 
-  if (isTypeChecked) {
+  if (initPropTypes) {
     propTypeString = `${componentName}.propTypes = {
       ${props
         .map((prop) => `${prop?.name}: PropTypes.${prop?.type},`)
@@ -27,6 +31,10 @@ export const rfcJsComponentContent = (
     )
     .join("\n    ");
   const reactImport = "React" + (!!states[0] ? ", {useState}" : "");
+
+  if (initDefFile) {
+    initDefFileService(location, props, componentName);
+  }
 
   return `import ${reactImport} from "react";
 import PropTypes from 'prop-types';
@@ -46,12 +54,14 @@ export const rccJsComponentContent = (
   componentName: string,
   props: IEntities = [],
   states: IEntities = [],
-  isTypeChecked: boolean = false
+  initPropTypes: boolean = false,
+  initDefFile: boolean = false,
+  location: LocationType
 ) => {
   const propString = props.map((prop) => prop?.name).join(",");
   let propTypeString = "";
 
-  if (isTypeChecked) {
+  if (initPropTypes) {
     propTypeString = `${componentName}.propTypes = {
       ${props
         .map((prop) => `${prop?.name}: PropTypes.${prop?.type},`)
@@ -68,6 +78,10 @@ export const rccJsComponentContent = (
   const stateDeconstruct = !!states[0]
     ? `const {${states.map((state) => state?.name).join(", ")}} = this.state;`
     : "";
+
+  if (initDefFile) {
+    initDefFileService(location, props, componentName);
+  }
 
   return `import React, {Component} from "react";
 import PropTypes from 'prop-types';
@@ -88,4 +102,19 @@ class ${componentName} extends Component {
 
 ${propTypeString}
 export default ${componentName}`;
+};
+
+const initDefFileService = (
+  location: LocationType,
+  props: IEntities = [],
+  componentName: string
+) => {
+  if (!props.length) {
+    return;
+  }
+
+  if (location === "here") {
+    const path = vscode.window.activeTextEditor?.document.uri.fsPath;
+    InitDefinitionController(path, props, componentName);
+  }
 };

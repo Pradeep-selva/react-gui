@@ -1,12 +1,19 @@
 export const initDefContent = (
-  propList: string
-) => `// replace 'Component' with the name of your component and add types to your props.
+  propList: string,
+  componentName: string | null
+) => `${
+  !componentName
+    ? "// replace 'Component' with the name of your component and add types to your props."
+    : ""
+}
 import React from "react";
 
-interface ComponentProps {
+interface ${componentName || "Component"}Props {
   ${propList}
 }
 
-declare const Component: React.SFC<ComponentProps>;
+declare const ${componentName || "Component"}: React.SFC<${
+  componentName || "Component"
+}Props>;
 
-export default Component;`;
+export default ${componentName || "Component"};`;

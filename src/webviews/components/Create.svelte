@@ -96,7 +96,8 @@
       componentType,
       props: (!!_props[0] ? _props : []) as IEntities,
       states: (!!_states[0] ? _states : []) as IEntities,
-      isTypeChecked: typeChecking === "propTypes"
+      initPropTypes: typeChecking === "propTypes",
+      initDefFile: typeChecking === "definition"
     };
     const validatedResult = validate(payload);
 
@@ -176,6 +177,10 @@
         {
           value: "propTypes",
           label: "PropTypes"
+        },
+        {
+          value: "definition",
+          label: ".d.ts file"
         }
       ]}
       onSelect={onTypeCheckSelect}
@@ -202,7 +207,7 @@
     onAddItem={onAddProp}
     title={"Props"}
     type={"props"}
-    isTypeChecked={(fileType === "js" && typeChecking === "propTypes") ||
+    isTypeChecked={(fileType === "js" && typeChecking !== "none") ||
       fileType === "ts"}
   />
   <InputFields

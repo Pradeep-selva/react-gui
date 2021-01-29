@@ -2,17 +2,28 @@ import * as vscode from "vscode";
 import type { IPayload } from "../types";
 import {
   rccJsComponentContent,
-  rfcJsComponentContent,
+  rfcJsComponentContent
+} from "../configs/JSComponent";
+import {
   rfcTsComponentContent,
   rccTsComponentContent
-} from "../configs";
+} from "../configs/TSComponent";
 
 declare var require: any;
 
 export default (payload: IPayload) => {
   const fs = require("fs");
   const path = vscode.window.activeTextEditor?.document.uri.fsPath;
-  const { componentName, props, states, componentType, fileType } = payload;
+  const {
+    componentName,
+    props,
+    states,
+    componentType,
+    fileType,
+    initDefFile,
+    initPropTypes,
+    location
+  } = payload;
 
   fs.writeFile(
     path,
@@ -22,13 +33,17 @@ export default (payload: IPayload) => {
             componentName,
             props,
             states,
-            payload.isTypeChecked
+            initPropTypes,
+            initDefFile,
+            location
           )
         : rccJsComponentContent(
             componentName,
             props,
             states,
-            payload.isTypeChecked
+            initPropTypes,
+            initDefFile,
+            location
           )
       : componentType === "rfc"
       ? rfcTsComponentContent(componentName, props, states)
