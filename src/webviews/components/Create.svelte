@@ -116,9 +116,12 @@
 </script>
 
 <div>
-  <h1 class="heading">New Component</h1>
+  <h2 class="heading">New Component</h2>
   {#if location === "new"}
     <h3 style="margin-bottom:5px;">File Name</h3>
+    <h6 class="helperText">
+      (file will be created in same dir as active file.)
+    </h6>
     <input
       bind:value={fileName}
       type="text"
@@ -231,5 +234,9 @@
 
   .form-field {
     margin-bottom: 5px;
+  }
+
+  .helperText {
+    padding: 0.5rem 0;
   }
 </style>

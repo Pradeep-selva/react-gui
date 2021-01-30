@@ -1,16 +1,18 @@
 import * as vscode from "vscode";
 import { capitalize } from "../utils";
 import { InitDefinitionController } from "../controllers";
-import type { IEntities, LocationType } from "../types";
+import type { IEntities, IPayload, LocationType } from "../types";
 
-export const rfcJsComponentContent = (
-  componentName: string,
-  props: IEntities = [],
-  states: IEntities = [],
-  initPropTypes: boolean = false,
-  initDefFile: boolean = false,
-  location: LocationType
-) => {
+export const rfcJsComponentContent = (payload: IPayload) => {
+  const {
+    componentName,
+    props,
+    states,
+    initPropTypes,
+    initDefFile,
+    location
+  } = payload;
+
   const propString = props.map((prop) => prop?.name).join(",");
   let propTypeString = "";
 
@@ -50,14 +52,16 @@ export default ${componentName};
 `;
 };
 
-export const rccJsComponentContent = (
-  componentName: string,
-  props: IEntities = [],
-  states: IEntities = [],
-  initPropTypes: boolean = false,
-  initDefFile: boolean = false,
-  location: LocationType
-) => {
+export const rccJsComponentContent = (payload: IPayload) => {
+  const {
+    componentName,
+    props,
+    states,
+    initPropTypes,
+    initDefFile,
+    location
+  } = payload;
+
   const propString = props.map((prop) => prop?.name).join(",");
   let propTypeString = "";
 

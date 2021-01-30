@@ -11,7 +11,6 @@ export default (payload: IPayload): string => {
     states,
     initPropTypes
   } = payload;
-
   if (!componentName) {
     return "Enter a component name to create it.";
   }

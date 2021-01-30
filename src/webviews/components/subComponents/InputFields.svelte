@@ -9,7 +9,10 @@
 <div>
   <h3>{title}</h3>
   {#if isTypeChecked}
-    <h6 class="helperText">(enter valid react prop types. Default: any)</h6>
+    <h6 class="helperText">
+      (enter valid react prop types (PropTypes)/typescript types (.d.ts).
+      Default: any)
+    </h6>
   {/if}
   <form>
     {#each items as item, id}

@@ -14,37 +14,34 @@ declare var require: any;
 export default (payload: IPayload) => {
   const fs = require("fs");
   const path = vscode.window.activeTextEditor?.document.uri.fsPath;
-  const {
-    componentName,
-    props,
-    states,
-    componentType,
-    fileType,
-    initDefFile,
-    initPropTypes,
-    location
-  } = payload;
+  const { componentName, props, states, componentType, fileType } = payload;
+
+  console.log(path, fileType);
+
+  if (fileType === "js" && !["js", "jsx"].some((ext) => path?.endsWith(ext))) {
+    vscode.window.showErrorMessage(
+      "cannot create js component in a file that isn't js/jsx"
+    );
+    return;
+  }
+
+  if (
+    fileType === "ts" &&
+    !["ts", "tsx"].some((ext) => path?.endsWith(ext)) &&
+    path?.endsWith(".d.ts")
+  ) {
+    vscode.window.showErrorMessage(
+      "cannot create ts component in a file that isn't ts/tsx"
+    );
+    return;
+  }
 
   fs.writeFile(
     path,
     fileType === "js"
       ? componentType === "rfc"
-        ? rfcJsComponentContent(
-            componentName,
-            props,
-            states,
-            initPropTypes,
-            initDefFile,
-            location
-          )
-        : rccJsComponentContent(
-            componentName,
-            props,
-            states,
-            initPropTypes,
-            initDefFile,
-            location
-          )
+        ? rfcJsComponentContent(payload)
+        : rccJsComponentContent(payload)
       : componentType === "rfc"
       ? rfcTsComponentContent(componentName, props, states)
       : rccTsComponentContent(componentName, props, states),
