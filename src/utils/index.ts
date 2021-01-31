@@ -1,2 +1,2 @@
-export * from "./GetNonce";
-export * from "./Common";
+export * from './GetNonce';
+export * from './Common';

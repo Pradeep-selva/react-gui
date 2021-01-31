@@ -1,6 +1,6 @@
 <script lang="ts">
   export let onAddItem: () => void;
-  export let type: "props" | "state";
+  export let type: 'props' | 'state';
   export let title: string;
   export let items: Array<any>;
   export let isTypeChecked: boolean;

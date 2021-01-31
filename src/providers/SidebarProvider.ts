@@ -1,6 +1,6 @@
-import * as vscode from "vscode";
-import { getNonce } from "../utils";
-import { componentCreationController } from "../controllers";
+import * as vscode from 'vscode';
+import { getNonce } from '../utils';
+import { componentCreationController } from '../controllers';
 
 export class SidebarProvider implements vscode.WebviewViewProvider {
   _view?: vscode.WebviewView;
@@ -19,20 +19,20 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
 
     webviewView.webview.html = this._getHtmlForWebview(webviewView.webview);
 
-    webviewView.webview.onDidReceiveMessage((data) => {
+    webviewView.webview.onDidReceiveMessage(data => {
       switch (data.type) {
-        case "onSubmit": {
+        case 'onSubmit': {
           componentCreationController(data.value);
           break;
         }
-        case "onInfo": {
+        case 'onInfo': {
           if (!data.value) {
             return;
           }
           vscode.window.showInformationMessage(data.value);
           break;
         }
-        case "onError": {
+        case 'onError': {
           if (!data.value) {
             return;
           }
@@ -49,17 +49,17 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
 
   private _getHtmlForWebview(webview: vscode.Webview) {
     const styleResetUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, "media", "reset.css")
+      vscode.Uri.joinPath(this._extensionUri, 'media', 'reset.css')
     );
     const styleVSCodeUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, "media", "vscode.css")
+      vscode.Uri.joinPath(this._extensionUri, 'media', 'vscode.css')
     );
 
     const scriptUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, "out", "compiled/Create.js")
+      vscode.Uri.joinPath(this._extensionUri, 'out', 'compiled/Create.js')
     );
     const styleMainUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, "out", "compiled/Create.css")
+      vscode.Uri.joinPath(this._extensionUri, 'out', 'compiled/Create.css')
     );
 
     const nonce = getNonce();

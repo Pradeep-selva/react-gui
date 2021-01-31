@@ -5,10 +5,10 @@ type IEntity = {
 
 export type IEntities = Array<IEntity>;
 
-export type FileType = "js" | "ts";
-export type ComponentType = "rfc" | "rcc";
-export type LocationType = "here" | "new";
-export type TypeCheckType = "none" | "propTypes" | "definition";
+export type FileType = 'js' | 'ts';
+export type ComponentType = 'rfc' | 'rcc';
+export type LocationType = 'here' | 'new';
+export type TypeCheckType = 'none' | 'propTypes' | 'definition';
 
 export interface IPayload {
   fileName: string;

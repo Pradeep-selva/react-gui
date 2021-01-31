@@ -1,7 +1,7 @@
-import * as vscode from "vscode";
-import { capitalize } from "../utils";
-import { InitDefinitionController } from "../controllers";
-import type { IEntities, IPayload, LocationType } from "../types";
+import * as vscode from 'vscode';
+import { capitalize } from '../utils';
+import { InitDefinitionController } from '../controllers';
+import type { IEntities, IPayload, LocationType } from '../types';
 
 export const rfcJsComponentContent = (payload: IPayload) => {
   const {
@@ -13,26 +13,26 @@ export const rfcJsComponentContent = (payload: IPayload) => {
     location
   } = payload;
 
-  const propString = props.map((prop) => prop?.name).join(",");
-  let propTypeString = "";
+  const propString = props.map(prop => prop?.name).join(',');
+  let propTypeString = '';
 
   if (initPropTypes) {
     propTypeString = `${componentName}.propTypes = {
       ${props
-        .map((prop) => `${prop?.name}: PropTypes.${prop?.type},`)
-        .join("\n  ")}
+        .map(prop => `${prop?.name}: PropTypes.${prop?.type},`)
+        .join('\n  ')}
     }`;
   }
 
   const stateString = states
     .map(
-      (state) =>
+      state =>
         `const [${state?.name}, set${capitalize(
           state?.name
         )}] = useState(null);`
     )
-    .join("\n    ");
-  const reactImport = "React" + (!!states[0] ? ", {useState}" : "");
+    .join('\n    ');
+  const reactImport = 'React' + (!!states[0] ? ', {useState}' : '');
 
   if (initDefFile) {
     initDefFileService(location, props, componentName);
@@ -62,26 +62,26 @@ export const rccJsComponentContent = (payload: IPayload) => {
     location
   } = payload;
 
-  const propString = props.map((prop) => prop?.name).join(",");
-  let propTypeString = "";
+  const propString = props.map(prop => prop?.name).join(',');
+  let propTypeString = '';
 
   if (initPropTypes) {
     propTypeString = `${componentName}.propTypes = {
       ${props
-        .map((prop) => `${prop?.name}: PropTypes.${prop?.type},`)
-        .join("\n  ")}
+        .map(prop => `${prop?.name}: PropTypes.${prop?.type},`)
+        .join('\n  ')}
     }`;
   }
 
   const stateString = states
-    .map((state) => `${state?.name}: null,`)
-    .join("\n    ");
+    .map(state => `${state?.name}: null,`)
+    .join('\n    ');
   const stateInit = `this.state = {
       ${stateString}
     };`;
   const stateDeconstruct = !!states[0]
-    ? `const {${states.map((state) => state?.name).join(", ")}} = this.state;`
-    : "";
+    ? `const {${states.map(state => state?.name).join(', ')}} = this.state;`
+    : '';
 
   if (initDefFile) {
     initDefFileService(location, props, componentName);
@@ -93,7 +93,7 @@ import PropTypes from 'prop-types';
 class ${componentName} extends Component {
   constructor(props) {
     super(props);
-    ${!!states[0] ? stateInit : ""}
+    ${!!states[0] ? stateInit : ''}
   }
 
   render() {
@@ -117,7 +117,7 @@ const initDefFileService = (
     return;
   }
 
-  if (location === "here") {
+  if (location === 'here') {
     const path = vscode.window.activeTextEditor?.document.uri.fsPath;
     InitDefinitionController(path, props, componentName);
   }

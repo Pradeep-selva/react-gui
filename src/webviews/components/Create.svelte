@@ -5,15 +5,15 @@
     ComponentType,
     LocationType,
     TypeCheckType
-  } from "../../types";
-  import { EVENTS } from "../../configs";
-  import validate from "./Validate";
-  import InputFields from "./subComponents/InputFields.svelte";
-  import RadioFields from "./subComponents/RadioFields.svelte";
+  } from '../../types';
+  import { EVENTS } from '../../configs';
+  import validate from './Validate';
+  import InputFields from './subComponents/InputFields.svelte';
+  import RadioFields from './subComponents/RadioFields.svelte';
 
   const defaultEntity = {
-    name: "",
-    type: ""
+    name: '',
+    type: ''
   };
 
   let props: IEntities = [
@@ -26,26 +26,26 @@
       ...defaultEntity
     }
   ];
-  let fileType: FileType = "js";
-  let componentType: ComponentType = "rfc";
-  let location: LocationType = "here";
-  let typeChecking: TypeCheckType = "none";
-  let fileName = "";
-  let componentName = "";
+  let fileType: FileType = 'js';
+  let componentType: ComponentType = 'rfc';
+  let location: LocationType = 'here';
+  let typeChecking: TypeCheckType = 'none';
+  let fileName = '';
+  let componentName = '';
 
   const onAddProp = () => {
-    if (props[props.length - 1].name !== "") {
+    if (props[props.length - 1].name !== '') {
       props = [...props, { ...defaultEntity }];
     } else {
       tsvscode.postMessage({
         type: EVENTS.error,
-        value: "Complete adding the previous prop to add a new one"
+        value: 'Complete adding the previous prop to add a new one'
       });
     }
   };
 
   const onAddState = () => {
-    if (states[states.length - 1].name !== "") {
+    if (states[states.length - 1].name !== '') {
       states = [
         ...states,
         {
@@ -55,7 +55,7 @@
     } else {
       tsvscode.postMessage({
         type: EVENTS.error,
-        value: "Complete adding the previous state to add a new one"
+        value: 'Complete adding the previous state to add a new one'
       });
     }
   };
@@ -74,7 +74,7 @@
       !!name
         ? {
             name,
-            type: !!type ? type : "any"
+            type: !!type ? type : 'any'
           }
         : null
     );
@@ -96,8 +96,8 @@
       componentType,
       props: (!!_props[0] ? _props : []) as IEntities,
       states: (!!_states[0] ? _states : []) as IEntities,
-      initPropTypes: typeChecking === "propTypes",
-      initDefFile: typeChecking === "definition"
+      initPropTypes: typeChecking === 'propTypes',
+      initDefFile: typeChecking === 'definition'
     };
     const validatedResult = validate(payload);
 
@@ -117,7 +117,7 @@
 
 <div>
   <h2 class="heading">New Component</h2>
-  {#if location === "new"}
+  {#if location === 'new'}
     <h3 style="margin-bottom:5px;">File Name</h3>
     <h6 class="helperText">
       (file will be created in same dir as active file.)
@@ -143,12 +143,12 @@
   <RadioFields
     items={[
       {
-        value: "here",
-        label: "Create here"
+        value: 'here',
+        label: 'Create here'
       },
       {
-        value: "new",
-        label: "Create in a new file"
+        value: 'new',
+        label: 'Create in a new file'
       }
     ]}
     onSelect={onLocationSelect}
@@ -158,32 +158,32 @@
   <RadioFields
     items={[
       {
-        value: "js",
-        label: "Javascript"
+        value: 'js',
+        label: 'Javascript'
       },
       {
-        value: "ts",
-        label: "Typescript"
+        value: 'ts',
+        label: 'Typescript'
       }
     ]}
     onSelect={onFileTypeSelect}
     defaultValue="js"
   />
-  {#if fileType === "js"}
+  {#if fileType === 'js'}
     <h3>Type Checking</h3>
     <RadioFields
       items={[
         {
-          value: "none",
-          label: "None"
+          value: 'none',
+          label: 'None'
         },
         {
-          value: "propTypes",
-          label: "PropTypes"
+          value: 'propTypes',
+          label: 'PropTypes'
         },
         {
-          value: "definition",
-          label: ".d.ts file"
+          value: 'definition',
+          label: '.d.ts file'
         }
       ]}
       onSelect={onTypeCheckSelect}
@@ -194,12 +194,12 @@
   <RadioFields
     items={[
       {
-        value: "rfc",
-        label: "Functional"
+        value: 'rfc',
+        label: 'Functional'
       },
       {
-        value: "rcc",
-        label: "Class"
+        value: 'rcc',
+        label: 'Class'
       }
     ]}
     onSelect={onComponentTypeSelect}
@@ -208,17 +208,17 @@
   <InputFields
     items={props}
     onAddItem={onAddProp}
-    title={"Props"}
-    type={"props"}
-    isTypeChecked={(fileType === "js" && typeChecking !== "none") ||
-      fileType === "ts"}
+    title={'Props'}
+    type={'props'}
+    isTypeChecked={(fileType === 'js' && typeChecking !== 'none') ||
+      fileType === 'ts'}
   />
   <InputFields
     items={states}
     onAddItem={onAddState}
-    title={"State"}
-    type={"state"}
-    isTypeChecked={fileType === "ts"}
+    title={'State'}
+    type={'state'}
+    isTypeChecked={fileType === 'ts'}
   />
   <button class="create" on:click={onSubmit}>Create</button>
 </div>
