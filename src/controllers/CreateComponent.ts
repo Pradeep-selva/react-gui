@@ -13,8 +13,19 @@ declare var require: any;
 
 export default (payload: IPayload) => {
   const fs = require('fs');
-  const path = vscode.window.activeTextEditor?.document.uri.fsPath;
-  const { componentName, props, states, componentType, fileType } = payload;
+  let path = vscode.window.activeTextEditor?.document.uri.fsPath;
+  const {
+    componentName,
+    props,
+    states,
+    componentType,
+    fileType,
+    fileName
+  } = payload;
+
+  if (!!fileName) {
+    path = `${path?.slice(0, path?.lastIndexOf('/'))}/${fileName}`;
+  }
 
   console.log(path, fileType);
 

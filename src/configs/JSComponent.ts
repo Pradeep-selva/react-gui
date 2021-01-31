@@ -10,7 +10,8 @@ export const rfcJsComponentContent = (payload: IPayload) => {
     states,
     initPropTypes,
     initDefFile,
-    location
+    location,
+    fileName
   } = payload;
 
   const propString = props.map(prop => prop?.name).join(',');
@@ -35,7 +36,7 @@ export const rfcJsComponentContent = (payload: IPayload) => {
   const reactImport = 'React' + (!!states[0] ? ', {useState}' : '');
 
   if (initDefFile) {
-    initDefFileService(location, props, componentName);
+    initDefFileService(location, props, componentName, fileName);
   }
 
   return `import ${reactImport} from "react";
@@ -59,8 +60,10 @@ export const rccJsComponentContent = (payload: IPayload) => {
     states,
     initPropTypes,
     initDefFile,
-    location
+    location,
+    fileName
   } = payload;
+  console.log(payload);
 
   const propString = props.map(prop => prop?.name).join(',');
   let propTypeString = '';
@@ -84,7 +87,7 @@ export const rccJsComponentContent = (payload: IPayload) => {
     : '';
 
   if (initDefFile) {
-    initDefFileService(location, props, componentName);
+    initDefFileService(location, props, componentName, fileName);
   }
 
   return `import React, {Component} from "react";
@@ -111,14 +114,17 @@ export default ${componentName}`;
 const initDefFileService = (
   location: LocationType,
   props: IEntities = [],
-  componentName: string
+  componentName: string,
+  fileName: string
 ) => {
   if (!props.length) {
     return;
   }
+  let path = vscode.window.activeTextEditor?.document.uri.fsPath;
 
-  if (location === 'here') {
-    const path = vscode.window.activeTextEditor?.document.uri.fsPath;
-    InitDefinitionController(path, props, componentName);
+  if (location === 'new') {
+    path = `${path?.slice(0, path?.lastIndexOf('/'))}/${fileName}`;
   }
+  console.log(path);
+  InitDefinitionController(path, props, componentName);
 };
