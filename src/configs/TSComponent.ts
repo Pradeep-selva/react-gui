@@ -7,7 +7,7 @@ export const rfcTsComponentContent = (
   states: IEntities = []
 ) => {
   const propTypes = props
-    .map(prop => `${prop.name}: ${prop.type};`)
+    .map(prop => `${prop?.name}: ${prop?.type};`)
     .join('\n  ');
   const propInterface = `interface IProps {
   ${propTypes}
@@ -18,7 +18,7 @@ export const rfcTsComponentContent = (
     .map(
       state =>
         `const [${state?.name}, set${capitalize(state?.name)}] = useState<${
-          state.type
+          state?.type
         }>(null);`
     )
     .join('\n    ');
@@ -45,14 +45,14 @@ export const rccTsComponentContent = (
   states: IEntities = []
 ) => {
   const propTypes = props
-    .map(prop => `${prop.name}: ${prop.type};`)
+    .map(prop => `${prop?.name}: ${prop?.type};`)
     .join('\n  ');
   const propInterface = `interface IProps {
   ${propTypes}
 }`;
 
   const stateTypes = states
-    .map(state => `${state.name}: ${state.type};`)
+    .map(state => `${state?.name}: ${state?.type};`)
     .join('\n');
   const stateInterface = `interface IState {
   ${stateTypes}

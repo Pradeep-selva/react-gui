@@ -33,10 +33,10 @@ export default (payload: IPayload): string => {
   }
 
   if (fileType === 'ts') {
-    const isPropValid = props.every(prop => !!prop?.type);
-    const isStateValid = states.every(state => !!state?.type);
+    const isPropInvalid = props.some(prop => !prop?.type && !!prop?.name);
+    const isStateInvalid = states.some(state => !state?.type && !!state?.name);
 
-    if (!isPropValid || !isStateValid) {
+    if (isPropInvalid || isStateInvalid) {
       return 'You must specify types for every prop/state for a TSX component';
     }
   }

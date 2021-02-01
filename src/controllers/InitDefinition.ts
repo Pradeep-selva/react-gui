@@ -33,7 +33,9 @@ export default (
       .map(prop => `${prop.replace(' ', '').replace('\n', '')}: ;`)
       .join('\n  ');
   } else {
-    propList = props.map(prop => `${prop?.name}: ${prop?.type};`).join('\n  ');
+    propList = props
+      .map(prop => !!prop.name && `${prop?.name}: ${prop?.type};`)
+      .join('\n  ');
   }
 
   fs.writeFile(

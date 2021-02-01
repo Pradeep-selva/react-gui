@@ -36,8 +36,7 @@ export default (payload: IPayload) => {
 
   if (
     fileType === 'ts' &&
-    !['ts', 'tsx'].some(ext => path?.endsWith(ext)) &&
-    path?.endsWith('.d.ts')
+    (!['ts', 'tsx'].some(ext => path?.endsWith(ext)) || path?.endsWith('.d.ts'))
   ) {
     vscode.window.showErrorMessage(
       "cannot create ts component in a file that isn't ts/tsx"
