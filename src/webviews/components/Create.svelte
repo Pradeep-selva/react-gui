@@ -116,9 +116,9 @@
 </script>
 
 <div>
-  <h2 class="heading">New Component</h2>
+  <h3 class="heading"><b>New Component</b></h3>
   {#if location === 'new'}
-    <h3 style="margin-bottom:5px;">File Name</h3>
+    <h4><u>File Name</u></h4>
     <h6 class="helperText">
       (file will be created in same dir as active file.)
     </h6>
@@ -128,9 +128,10 @@
       class="form-field"
       id={`fileName`}
       placeholder="Enter the file name"
+      style="margin-bottom:5px;"
     />
   {/if}
-  <h3 style="margin:1rem 0 5px 0;">Component Name</h3>
+  <h4 style="margin:1rem 0 5px 0;"><u>Component Name</u></h4>
   <input
     bind:value={componentName}
     type="text"
@@ -139,7 +140,7 @@
     id={`componentName`}
     placeholder="Enter the component's name'"
   />
-  <h3>Location</h3>
+  <h4><u>Location</u></h4>
   <RadioFields
     items={[
       {
@@ -154,7 +155,7 @@
     onSelect={onLocationSelect}
     defaultValue="here"
   />
-  <h3>File Type</h3>
+  <h4><u>File Type</u></h4>
   <RadioFields
     items={[
       {
@@ -170,7 +171,7 @@
     defaultValue="js"
   />
   {#if fileType === 'js'}
-    <h3>Type Checking</h3>
+    <h4><u>Type Checking</u></h4>
     <RadioFields
       items={[
         {
@@ -190,7 +191,7 @@
       defaultValue="none"
     />
   {/if}
-  <h3>Component Type</h3>
+  <h4><u>Component Type</u></h4>
   <RadioFields
     items={[
       {
@@ -210,14 +211,22 @@
     onAddItem={onAddProp}
     title={'Props'}
     type={'props'}
+    helperText={typeChecking !== 'none' || fileType === 'ts'
+      ? typeChecking === 'definition'
+        ? 'enter valid typescript types. Default: any'
+        : 'enter valid react prop types .Default: PropTypes.any'
+      : false}
     isTypeChecked={(fileType === 'js' && typeChecking !== 'none') ||
       fileType === 'ts'}
   />
+  <div class="space" />
   <InputFields
     items={states}
     onAddItem={onAddState}
     title={'State'}
     type={'state'}
+    helperText={fileType === 'ts' &&
+      'enter valid typescript types. Default: any'}
     isTypeChecked={fileType === 'ts'}
   />
   <button class="create" on:click={onSubmit}>Create</button>
@@ -225,7 +234,7 @@
 
 <style>
   .heading {
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
   }
 
   .create {
@@ -238,5 +247,8 @@
 
   .helperText {
     padding: 0.5rem 0;
+  }
+  .space {
+    height: 10px;
   }
 </style>

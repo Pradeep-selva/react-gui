@@ -4,14 +4,14 @@
   export let title: string;
   export let items: Array<any>;
   export let isTypeChecked: boolean;
+  export let helperText: string | boolean;
 </script>
 
 <div>
-  <h3>{title}</h3>
-  {#if isTypeChecked}
+  <h4><u>{title}</u></h4>
+  {#if !!helperText}
     <h6 class="helperText">
-      (enter valid react prop types (PropTypes)/typescript types (.d.ts).
-      Default: any)
+      ({helperText})
     </h6>
   {/if}
   <form>
