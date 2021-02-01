@@ -2,7 +2,16 @@
   "name": "react-gui",
   "displayName": "React-GUI",
   "description": "A tool that enables you to rapidly build react components with ease using a GUI",
-  "version": "0.0.1",
+  "version": "1.0.0",
+  "license": "see license in LICENSE",
+  "repository": {
+    "url": "https://github.com/Pradeep-selva/react-gui",
+    "type": "git"
+  },
+  "author": {
+    "name": "Pradeep Selva",
+    "url": "https://github.com/Pradeep-selva"
+  },
   "engines": {
     "vscode": "^1.52.0"
   },

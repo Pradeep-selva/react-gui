@@ -1,9 +1,9 @@
 # Change Log
 
-All notable changes to the "react-gui" extension will be documented in this file.
+All notable changes to the React GUI extension will be documented in this file.
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+- **[1.0.0]** Component creation gui and definition file initialization. (js/ts)
 
-## [Unreleased]
+## [Upcoming]
 
-- Initial release
+- redux support
