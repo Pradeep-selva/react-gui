@@ -1,42 +1,44 @@
-# Welcome to your VS Code Extension
+<h1 align="center">React GUI</h1>
+<div align="center">
+  <strong>A blazingly fast way to bootstrap react components</strong>
+  <p>Create your react components quickly & easily with a straightforward GUI</p>
+</div>
 
-## What's in the folder
+---
 
-* This folder contains all of the files necessary for your extension.
-* `package.json` - this is the manifest file in which you declare your extension and command.
-  * The sample plugin registers a command and defines its title and command name. With this information VS Code can show the command in the command palette. It doesn’t yet need to load the plugin.
-* `src/extension.ts` - this is the main file where you will provide the implementation of your command.
-  * The file exports one function, `activate`, which is called the very first time your extension is activated (in this case by executing the command). Inside the `activate` function we call `registerCommand`.
-  * We pass the function containing the implementation of the command as the second parameter to `registerCommand`.
+## Demo
 
-## Get up and running straight away
+<div align="center">
+    <img src="./media/react-gui-recording.gif" alt="demo"/>
+</div>
 
-* Press `F5` to open a new window with your extension loaded.
-* Run your command from the command palette by pressing (`Ctrl+Shift+P` or `Cmd+Shift+P` on Mac) and typing `Hello World`.
-* Set breakpoints in your code inside `src/extension.ts` to debug your extension.
-* Find output from your extension in the debug console.
+## Installation
 
-## Make changes
+## Usage
 
-* You can relaunch the extension from the debug toolbar after changing code in `src/extension.ts`.
-* You can also reload (`Ctrl+R` or `Cmd+R` on Mac) the VS Code window with your extension to load your changes.
+1. Component creation -
+   Open the component creation form from sidebar and fill it up as shown in the above demo.
+   Click create and get started with producing logic for your component, without worrying about
+   boilerplate.
+2. Definition file initialization -
 
+   - Highlight a list of props that you want to create a definition file (.d.ts) from.
+   - Press ctrl+shift+p and search `Initialize Definition File`.
+   - Press the `React GUI: Initialize Definition File` option.
 
-## Explore the API
+   **eg:** You may highlight the props from lists like the following. The highlighted text in
+   the following cases must be `label, placeholder, value`.
 
-* You can open the full set of our API when you open the file `node_modules/@types/vscode/index.d.ts`.
+   1. `const {label, placeholder, value} = this.props;`
+   2. `const InputField = ({label, placeholder, value}) =>`
 
-## Run tests
+## Built Using
 
-* Open the debug viewlet (`Ctrl+Shift+D` or `Cmd+Shift+D` on Mac) and from the launch configuration dropdown pick `Extension Tests`.
-* Press `F5` to run the tests in a new window with your extension loaded.
-* See the output of the test result in the debug console.
-* Make changes to `src/test/suite/extension.test.ts` or create new test files inside the `test/suite` folder.
-  * The provided test runner will only consider files matching the name pattern `**.test.ts`.
-  * You can create folders inside the `test` folder to structure your tests any way you want.
+- Typescript
+- Svelte
+- HTML/CSS
+- Yo
 
-## Go further
+## License
 
- * Reduce the extension size and improve the startup time by [bundling your extension](https://code.visualstudio.com/api/working-with-extensions/bundling-extension).
- * [Publish your extension](https://code.visualstudio.com/api/working-with-extensions/publishing-extension) on the VSCode extension marketplace.
- * Automate builds by setting up [Continuous Integration](https://code.visualstudio.com/api/working-with-extensions/continuous-integration).
+[MIT](LICENSE) © [Pradeep-selva](https://github.com/Pradeep-selva)

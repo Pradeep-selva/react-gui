@@ -1,65 +1,51 @@
-# react-gui README
+<h1 align="center">React GUI</h1>
+<div align="center">
+  <strong>A blazingly fast way to bootstrap react components</strong>
+  <p>Create your react components quickly & easily with a straightforward GUI</p>
+</div>
 
-This is the README for your extension "react-gui". After writing up a brief description, we recommend including the following sections.
+---
 
-## Features
+## Demo
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+<div align="center">
+    <img src="./media/react-gui-recording.gif" alt="demo"/>
+</div>
 
-For example if there is an image subfolder under your extension project workspace:
+## Installation
 
-\!\[feature X\]\(images/feature-x.png\)
+## Usage
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+1. Component creation -
+   Open the component creation form from sidebar and fill it up as shown in the above demo.
+   Click create and get started with producing logic for your component, without worrying about
+   boilerplate.
+2. Definition file initialization -
 
-## Requirements
+   - Highlight a list of props that you want to create a definition file (.d.ts) from.
+   - Press ctrl+shift+p and search `Initialize Definition File`.
+   - Press the `React GUI: Initialize Definition File` option.
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+   **eg:** You may highlight the props from lists like the following. The highlighted text in
+   the following cases must be `label, placeholder, value`.
 
-## Extension Settings
+   1. `const {label, placeholder, value} = this.props;`
+   2. `const InputField = ({label, placeholder, value}) =>`
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+## Built Using
 
-For example:
+- Typescript
+- Svelte
+- HTML/CSS
+- Yo
 
-This extension contributes the following settings:
+## Steps to run locally
 
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
+- Clone the repo using `git clone https://github.com/Pradeep-selva/react-gui`.
+- install dependencies using `yarn` or `npm install`.
+- Run `yarn watch` in your root directory.
+- In your root directory press f5 and select `npm compile`.
 
-## Known Issues
+## License
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
------------------------------------------------------------------------------------------------------------
-
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+[MIT](LICENSE) © [Pradeep-selva](https://github.com/Pradeep-selva)
