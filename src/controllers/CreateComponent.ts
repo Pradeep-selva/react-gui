@@ -27,8 +27,6 @@ export default (payload: IPayload) => {
     path = `${path?.slice(0, path?.lastIndexOf('/'))}/${fileName}`;
   }
 
-  console.log(path, fileType);
-
   if (fileType === 'js' && !['js', 'jsx'].some(ext => path?.endsWith(ext))) {
     vscode.window.showErrorMessage(
       "cannot create js component in a file that isn't js/jsx"

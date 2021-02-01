@@ -63,8 +63,6 @@ export const rccJsComponentContent = (payload: IPayload) => {
     location,
     fileName
   } = payload;
-  console.log(payload);
-
   const propString = props.map(prop => prop?.name).join(',');
   let propTypeString = '';
 
@@ -125,6 +123,6 @@ const initDefFileService = (
   if (location === 'new') {
     path = `${path?.slice(0, path?.lastIndexOf('/'))}/${fileName}`;
   }
-  console.log(path);
+
   InitDefinitionController(path, props, componentName);
 };
