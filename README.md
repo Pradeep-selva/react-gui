@@ -17,9 +17,11 @@
 ## Usage
 
 1. Component creation -
+
    Open the component creation form from sidebar and fill it up as shown in the above demo.
    Click create and get started with producing logic for your component, without worrying about
    boilerplate.
+
 2. Definition file initialization -
 
    - Highlight a list of props that you want to create a definition file (.d.ts) from.
