@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="./media/icon.png" alt="icon"/>
+    <img src="./media/icon.png" alt="icon" style="max-width: 100px;"/>
 </div>
 
 <h1 align="center">React GUI</h1>
