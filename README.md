@@ -18,6 +18,11 @@
 
 ## Installation
 
+Download the extension by -
+
+1. Searching for React GUI by pradeepselva on your vscode extensions.
+2. Visit the extension's home page at `https://marketplace.visualstudio.com/items?itemName=pradeepselva.react-gui` and download it.
+
 ## Usage
 
 1. Component creation -
