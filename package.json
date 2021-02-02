@@ -17,6 +17,7 @@
     "name": "Pradeep Selva",
     "url": "https://github.com/Pradeep-selva"
   },
+  "publisher": "pradeepselva",
   "engines": {
     "vscode": "^1.52.0"
   },
