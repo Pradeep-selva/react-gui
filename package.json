@@ -1,9 +1,14 @@
 {
   "name": "react-gui",
-  "displayName": "React-GUI",
+  "displayName": "React GUI",
   "description": "A tool that enables you to rapidly build react components with ease using a GUI",
   "version": "1.0.0",
-  "license": "see license in LICENSE",
+  "license": "MIT",
+  "icon": "media/icon.png",
+  "homepage": "https://github.com/Pradeep-selva/react-gui",
+  "bugs": {
+    "url": "https://github.com/Pradeep-selva/react-gui/issues"
+  },
   "repository": {
     "url": "https://github.com/Pradeep-selva/react-gui",
     "type": "git"
@@ -16,7 +21,20 @@
     "vscode": "^1.52.0"
   },
   "categories": [
+    "Programming Languages",
     "Other"
+  ],
+  "keywords": [
+    "react",
+    "redux",
+    "typescript",
+    "javascript",
+    "code",
+    "generation",
+    "generate-code",
+    "quick",
+    "component",
+    "snippet"
   ],
   "activationEvents": [
     "onView:react-gui-side-panel",

@@ -1,3 +1,7 @@
+<div align="center">
+    <img src="./media/icon.png" alt="icon"/>
+</div>
+
 <h1 align="center">React GUI</h1>
 <div align="center">
   <strong>A blazingly fast way to bootstrap react components</strong>

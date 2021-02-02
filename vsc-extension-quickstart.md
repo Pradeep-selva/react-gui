@@ -12,8 +12,6 @@
     <img src="./media/react-gui-recording.gif" alt="demo"/>
 </div>
 
-## Installation
-
 ## Usage
 
 1. Component creation -
