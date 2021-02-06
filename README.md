@@ -29,7 +29,7 @@ Download the extension by -
 
    Open the component creation form from sidebar and fill it up as shown in the above demo.
    Click create and get started with producing logic for your component, without worrying about
-   boilerplate.
+   boilerplate. visit [this link](https://github.com/Pradeep-selva/react-gui/blob/master/media/react-gui-recording.gif) if the demo doesn't load.
 
 2. Definition file initialization -
 
