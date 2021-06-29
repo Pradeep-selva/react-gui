@@ -39,7 +39,8 @@
   ],
   "activationEvents": [
     "onView:react-gui-side-panel",
-    "onCommand:react-gui.init-def"
+    "onCommand:react-gui.init-def",
+    "onCommand:react-gui.init-redux"
   ],
   "main": "./dist/extension.js",
   "contributes": {
@@ -67,6 +68,11 @@
       {
         "command": "react-gui.init-def",
         "title": "Initialize definition file",
+        "category": "React GUI"
+      },
+      {
+        "command": "react-gui.init-redux",
+        "title": "Initialize redux setup",
         "category": "React GUI"
       }
     ]
