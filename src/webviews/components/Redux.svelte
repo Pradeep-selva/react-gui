@@ -1,47 +1,98 @@
 <script lang="ts">
-    import type { FileType } from "../../types";
-    import RadioFields from "./subComponents/RadioFields.svelte"
+  import type { FileType, ReducersType } from '../../types';
+  import RadioFields from './subComponents/RadioFields.svelte';
+  import InputFields from './subComponents/InputFields.svelte';
 
-    let fileType: FileType = "js"
+  let defaultEntity = {
+      name:'',
+      type: ''
+  }
 
-    const onFileTypeSelect = (event: any) =>
-        fileType = event.target.defaultValue
+  let fileType: FileType = 'js';
+  let reducerData: ReducersType = {};
+  let curReducerName = "";
+
+  const onFileTypeSelect = (event: any) =>
+    (fileType = event.target.defaultValue);
+
+  const onAddReducer = () => {
+      reducerData = {
+          ...reducerData,
+          [curReducerName]: [defaultEntity]
+      }
+  }  
+
+  const onAddReducerState = (reducerName:string) => {
+    reducerData = {
+        ...reducerData,
+        [reducerName]: [
+            ...reducerData[reducerName],
+            defaultEntity
+        ]
+    }
+  }
+    
 </script>
 
 <div class="container">
-    <h1 class="heading">Redux Setup</h1>
+  <h1 class="heading">Redux Setup</h1>
 
-    <div class="space">
-        <h4><u>File Type: </u> ({fileType}) </h4>
-        <RadioFields
-            styles="justify-content:flex-start;"
-            items={[
-            {
-                value: 'js',
-                label: 'Javascript'
-            },
-            {
-                value: 'ts',
-                label: 'Typescript'
-            }
-            ]}
-            onSelect={onFileTypeSelect}
-            defaultValue="js"
+  <div class="space">
+    <h4><u>File Type: </u> ({fileType})</h4>
+    <RadioFields
+      styles="justify-content:flex-start;"
+      items={[
+        {
+          value: 'js',
+          label: 'Javascript'
+        },
+        {
+          value: 'ts',
+          label: 'Typescript'
+        }
+      ]}
+      onSelect={onFileTypeSelect}
+      defaultValue="js"
+    />
+  </div>
+
+  <div class="space">
+      <div class="space">
+        <input
+        bind:value={curReducerName}
+        type="text"
+        class="form-field"
+        id={`add-reducer`}
+        placeholder="new reducer name"
         />
-    </div>
+        <button on:click={onAddReducer}>Add a new reducer</button>
+      </div>
+      {#each Object.keys(reducerData) as reducer}
+          <h4>{reducer}</h4>
+          <InputFields
+            items={reducerData[reducer]}
+            onAddItem={() => onAddReducerState(reducer)}
+            title={'State'}
+            type={'state'}
+            helperText={fileType === 'ts' &&
+            'enter valid typescript types. Default: any'}
+            isTypeChecked={fileType === 'ts'}
+         />
+      {/each}
+  </div>
 </div>
 
 <style>
-    .heading {
-        display: grid;
-        justify-content: center;
-    }
+  .heading {
+    display: grid;
+    justify-content: center;
+  }
 
-    .container {
-        margin: 4vh 10vw 0 10vw;
-    }
+  .container {
+    margin: 4vh 10vw 0 10vw;
+  }
 
-    .space {
-        margin: 1vh;
-    }
+  .space {
+    margin: 1vh;
+  }
 </style>

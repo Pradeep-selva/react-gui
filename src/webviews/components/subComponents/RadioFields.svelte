@@ -5,7 +5,7 @@
   }>;
   export let defaultValue: string;
   export let onSelect: (event: any) => void;
-  export let styles: string = "";
+  export let styles: string = '';
 </script>
 
 <div>

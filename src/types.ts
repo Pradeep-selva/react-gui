@@ -21,3 +21,7 @@ export interface IPayload {
   initPropTypes: boolean;
   initDefFile: boolean;
 }
+
+export type ReducersType = {
+  [x:string]: IEntities
+};

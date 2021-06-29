@@ -1,10 +1,10 @@
-import * as vscode from "vscode";
-import { getNonce } from "../utils";
+import * as vscode from 'vscode';
+import { getNonce } from '../utils';
 
 export class PanelProvider {
   public static currentPanel: PanelProvider | undefined;
 
-  public static readonly viewType = "hello-world";
+  public static readonly viewType = 'init-redux';
 
   private readonly _panel: vscode.WebviewPanel;
   private readonly _extensionUri: vscode.Uri;
@@ -23,15 +23,15 @@ export class PanelProvider {
 
     const panel = vscode.window.createWebviewPanel(
       PanelProvider.viewType,
-      "Panel",
+      'Redux Initialization',
       column || vscode.ViewColumn.One,
       {
         enableScripts: true,
 
         localResourceRoots: [
-          vscode.Uri.joinPath(extensionUri, "media"),
-          vscode.Uri.joinPath(extensionUri, "out/compiled"),
-        ],
+          vscode.Uri.joinPath(extensionUri, 'media'),
+          vscode.Uri.joinPath(extensionUri, 'out/compiled')
+        ]
       }
     );
 
@@ -73,16 +73,16 @@ export class PanelProvider {
     const webview = this._panel.webview;
 
     this._panel.webview.html = this._getHtmlForWebview(webview);
-    webview.onDidReceiveMessage(async (data) => {
+    webview.onDidReceiveMessage(async data => {
       switch (data.type) {
-        case "onInfo": {
+        case 'onInfo': {
           if (!data.value) {
             return;
           }
           vscode.window.showInformationMessage(data.value);
           break;
         }
-        case "onError": {
+        case 'onError': {
           if (!data.value) {
             return;
           }
@@ -94,18 +94,18 @@ export class PanelProvider {
   }
 
   private _getHtmlForWebview(webview: vscode.Webview) {
-     const stylesResetUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, "media", "reset.css")
+    const stylesResetUri = webview.asWebviewUri(
+      vscode.Uri.joinPath(this._extensionUri, 'media', 'reset.css')
     );
     const stylesVSCodeUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, "media", "vscode.css")
+      vscode.Uri.joinPath(this._extensionUri, 'media', 'vscode.css')
     );
 
     const scriptMainUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, "out/compiled", "Redux.js")
+      vscode.Uri.joinPath(this._extensionUri, 'out/compiled', 'Redux.js')
     );
     const stylesMainUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, "out", "compiled/Redux.css")
+      vscode.Uri.joinPath(this._extensionUri, 'out', 'compiled/Redux.css')
     );
 
     const nonce = getNonce();

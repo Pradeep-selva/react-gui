@@ -1,2 +1,2 @@
 export * from './SidebarProvider';
-export * from "./PanelProvider";
+export * from './PanelProvider';
