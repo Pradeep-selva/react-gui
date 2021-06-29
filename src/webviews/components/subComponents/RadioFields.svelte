@@ -5,12 +5,13 @@
   }>;
   export let defaultValue: string;
   export let onSelect: (event: any) => void;
+  export let styles: string = "";
 </script>
 
 <div>
   <form class="container">
     {#each items as item}
-      <div class="radio-container">
+      <div class="radio-container" style={styles}>
         <input
           class="radio-item"
           type="radio"

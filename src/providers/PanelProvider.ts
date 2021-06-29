@@ -102,11 +102,11 @@ export class PanelProvider {
     );
 
     const scriptMainUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, "out/compiled", "HelloWorld.js")
+      vscode.Uri.joinPath(this._extensionUri, "out/compiled", "Redux.js")
     );
-    // const cssUri = webview.asWebviewUri(
-    //   vscode.Uri.joinPath(this._extensionUri, "out", "compiled/swiper.css")
-    // );
+    const stylesMainUri = webview.asWebviewUri(
+      vscode.Uri.joinPath(this._extensionUri, "out", "compiled/Redux.css")
+    );
 
     const nonce = getNonce();
 
@@ -122,6 +122,7 @@ export class PanelProvider {
 				<meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="${stylesResetUri}" rel="stylesheet">
         <link href="${stylesVSCodeUri}" rel="stylesheet">
+        <link href="${stylesMainUri}" rel="stylesheet">
         <script nonce="${nonce}">
         </script>
 			</head>
