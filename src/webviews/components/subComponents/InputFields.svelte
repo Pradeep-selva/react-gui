@@ -36,7 +36,15 @@
         {/if}
       </div>
     {/each}
-    <button on:click={onAddItem}> add {type}</button>
+    <button
+      on:click={event => {
+        event.preventDefault();
+        event.stopPropagation();
+        onAddItem();
+      }}
+    >
+      add {type}</button
+    >
   </form>
 </div>
 

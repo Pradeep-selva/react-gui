@@ -4,34 +4,35 @@
   import InputFields from './subComponents/InputFields.svelte';
 
   let defaultEntity = {
-      name:'',
-      type: ''
-  }
+    name: '',
+    type: ''
+  };
 
   let fileType: FileType = 'js';
   let reducerData: ReducersType = {};
-  let curReducerName = "";
+  let curReducerName = '';
 
   const onFileTypeSelect = (event: any) =>
     (fileType = event.target.defaultValue);
 
   const onAddReducer = () => {
-      reducerData = {
-          ...reducerData,
-          [curReducerName]: [defaultEntity]
-      }
-  }  
-
-  const onAddReducerState = (reducerName:string) => {
     reducerData = {
-        ...reducerData,
-        [reducerName]: [
-            ...reducerData[reducerName],
-            defaultEntity
-        ]
-    }
+      ...reducerData,
+      [curReducerName]: [defaultEntity]
+    };
+  };
+
+  const onAddReducerState = (reducerName: string) => {
+    console.log(JSON.stringify(reducerData[reducerName]));
+    reducerData = {
+      ...reducerData,
+      [reducerName]: [...reducerData[reducerName], defaultEntity]
+    };
+  };
+
+  $: {
+    console.log(reducerData);
   }
-    
 </script>
 
 <div class="container">
@@ -57,28 +58,28 @@
   </div>
 
   <div class="space">
-      <div class="space">
-        <input
+    <div class="space">
+      <input
         bind:value={curReducerName}
         type="text"
         class="form-field"
         id={`add-reducer`}
         placeholder="new reducer name"
-        />
-        <button on:click={onAddReducer}>Add a new reducer</button>
-      </div>
-      {#each Object.keys(reducerData) as reducer}
-          <h4>{reducer}</h4>
-          <InputFields
-            items={reducerData[reducer]}
-            onAddItem={() => onAddReducerState(reducer)}
-            title={'State'}
-            type={'state'}
-            helperText={fileType === 'ts' &&
-            'enter valid typescript types. Default: any'}
-            isTypeChecked={fileType === 'ts'}
-         />
-      {/each}
+      />
+      <button on:click={onAddReducer}>Add a new reducer</button>
+    </div>
+    {#each Object.values(reducerData) as states, id}
+      <h4><b>{'reducer'}</b></h4>
+      <InputFields
+        items={states}
+        onAddItem={() => onAddReducerState('abc')}
+        title={'State'}
+        type={'state'}
+        helperText={fileType === 'ts' &&
+          'enter valid typescript types. Default: any'}
+        isTypeChecked={fileType === 'ts'}
+      />
+    {/each}
   </div>
 </div>
 
